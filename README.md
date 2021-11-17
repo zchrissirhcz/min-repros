@@ -65,4 +65,4 @@ Together with OpenCV-4.5.4 (only for loading data, not affect the performance re
 | ndk-r21b | 3.621770 ms |
 | ndk-r22b | 3.475886 ms |
 | ndk-r23b | 177.813490 ms |
-| ndk-r24-beta1 | took 3.544636 ms |
+| ndk-r24-beta1 | 3.544636 ms |
