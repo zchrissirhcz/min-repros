@@ -4,13 +4,12 @@
 
 int main()
 {
-    constexpr int width = 160;
-    constexpr int height = 160;
 
-#if __linux__
-    std::string image_path = "/home/zz/data/tallgirl.jpg";
-#else // assume android
+#if ANDROID
     std::string image_path = "/data/local/tmp/tallgirl.jpg";
+#elif __linux__
+    std::cout << "__linux__" << std::endl;
+    std::string image_path = "/home/zz/data/tallgirl.jpg";
 #endif
 
     cv::Mat image = cv::imread(image_path);
@@ -23,6 +22,9 @@ int main()
     int w = srcw / 2;
     int h = srch / 2;
     int stride = srcstride / 2;
+
+    printf("src image: width=%d, height=%d\n", srcw, srch);
+    printf("dst image: width=%d, height=%d\n", w, h);
 
     unsigned int v = 0;
     constexpr float tm[6] = {
