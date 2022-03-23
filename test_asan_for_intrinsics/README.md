@@ -23,7 +23,7 @@ cd build
 ./linux-x64-run.sh
 ```
 
-![](Linux-x64-output.png)
+![](snapshots/Linux-x64-output.png)
 
 ### Target platform is Android ARM
 ```bash
@@ -32,4 +32,4 @@ cd build
 ./android-arm64-run.sh
 ```
 
-![](Android-arm64-output.png)
+![](snapshots/Android-arm64-output.png)
