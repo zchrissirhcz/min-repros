@@ -51,7 +51,6 @@ int main()
     int xofsp[8] = {0, 1916};
     
     {
-        // load and transpose 8x8 uint8_t matrix for SIMD speedup.
         uint8x8_t d0 = vld1_u8(Sp + xofsp[0]);
         uint8x8_t d1 = vld1_u8(Sp + xofsp[1]);
 
