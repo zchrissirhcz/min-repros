@@ -14,3 +14,22 @@ To verify, a simulated `vld1_u8` is implemented for non-NEON case, such as Linux
 | arm64    | No |
 | linux-x64 | Yes |
 
+## Execute Steps & Snapshots
+
+### Target platform is Linux-x64
+```bash
+cd build
+./linux-x64-build.sh
+./linux-x64-run.sh
+```
+
+![](Linux-x64-output.png)
+
+### Target platform is Android ARM
+```bash
+cd build
+./android-arm64-build.sh
+./android-arm64-run.sh
+```
+
+![](Android-arm64-output.png)
