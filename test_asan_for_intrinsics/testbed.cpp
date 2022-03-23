@@ -52,7 +52,7 @@ int main()
     
     {
         uint8x8_t d0 = vld1_u8(Sp + xofsp[0]);
-        uint8x8_t d1 = vld1_u8(Sp + xofsp[1]);
+        uint8x8_t d1 = vld1_u8(Sp + xofsp[1]); //1916 + 8 = 1924, which is greater than 1920, should report invalid heap memory read.
 
         std::cout << d0 << std::endl;
         std::cout << d1 << std::endl;
