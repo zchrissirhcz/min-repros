@@ -1,16 +1,17 @@
 # ndk-r24 + CMake failed
 
 ## Intro
-This folder serves as the minimal reproduce example for ndk+cmake build, shows ndk-r24 fail, and ndk-r23b success.
+This folder serves as the minimal reproduce example for ndk+cmake build, shows ndk-r24 fail, and ndk-r23b success, ndk-r25-beta2 success.
 
 ## Environment
 - Host: Ubuntu 20.04
 - CMake version: cmake-3.23.0-rc5
 
-| ndk version | state |
-| ----------- | ----- |
-| ndk-r23b    | success |
-| ndk-r24     | fail |
+| ndk version   | state   |
+| ------------- | ------- |
+| ndk-r23b      | success |
+| ndk-r24       | fail    |
+| ndk-r25-beta2 | success |
 
 See build/android-arm64-build.sh for switching ndk versions.
 

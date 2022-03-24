@@ -2,6 +2,7 @@
 
 #ANDROID_NDK=~/soft/android-ndk-r23b  # success
 ANDROID_NDK=~/soft/android-ndk-r24  # fail during cmake
+#ANDROID_NDK=~/soft/android-ndk-r25-beta2 # success
 
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 
