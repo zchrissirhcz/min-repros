@@ -13,6 +13,7 @@ To verify, a simulated `vld1_u8` is implemented for non-NEON case, such as Linux
 | arm32    | No |
 | arm64    | No |
 | linux-x64 | Yes |
+| mac-M1   | Yes |
 
 ## Execute Steps & Snapshots
 
@@ -33,3 +34,14 @@ cd build
 ```
 
 ![](snapshots/Android-arm64-output.png)
+
+### Target platform is Mac M1
+Apple M1 is with ARM64.
+
+```zsh
+cd build
+./mac-M1-build.sh
+./mac-M1-run.sh
+```
+
+![](snapshots/Mac-M1-output.png)

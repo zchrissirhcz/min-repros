@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(x)
+project(my)
+
+#set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "") # works
 
 
 option(USE_ASAN "Use Address Sanitizer?" ON)
