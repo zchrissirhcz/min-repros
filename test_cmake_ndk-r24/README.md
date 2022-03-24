@@ -3,6 +3,8 @@
 ## Intro
 This folder serves as the minimal reproduce example for ndk+cmake build, shows ndk-r24 fail, and ndk-r23b success, ndk-r25-beta2 success.
 
+(Reported in https://github.com/android/ndk/issues/1688)
+
 ## Environment
 - Host: Ubuntu 20.04
 - CMake version: cmake-3.23.0-rc5
