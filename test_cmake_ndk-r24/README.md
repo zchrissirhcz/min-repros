@@ -15,7 +15,7 @@ This folder serves as the minimal reproduce example for ndk+cmake build, shows n
 
 See build/android-arm64-build.sh for switching ndk versions.
 
-## Output
+## android arm64 Output
 ```bash
 cd build
 ./android-arm64-build.sh
@@ -62,3 +62,6 @@ See also "/home/zz/work/github/min-repros/test_cmake_ndk/build/android-arm64/CMa
 ninja: error: loading 'build.ninja': No such file or directory
 
 ```
+
+## Android arm32 output
+Same as arm64.
