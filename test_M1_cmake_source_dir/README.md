@@ -21,3 +21,11 @@ The actual output is:
 ```
 
 ![](mac-M1-output.png)
+
+## linux-x64 output
+```
+cd biuld
+./linux-x64-build.sh
+```
+
+![](linux-x64-output.png)

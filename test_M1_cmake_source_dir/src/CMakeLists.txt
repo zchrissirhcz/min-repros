@@ -3,3 +3,4 @@
 message(STATUS "In src directory, CMAKE_SOURCE_DIR is ${CMAKE_SOURCE_DIR}")
 
 add_executable(testbed testbed.cpp)
+target_include_directories(testbed PUBLIC ${CMAKE_SOURCE_DIR})
