@@ -46,6 +46,30 @@ int save_image_16uc1_spng(const std::string& image_path, const cv::Mat& src)
     ihdr.filter_method = 0;
     ihdr.interlace_method = 0;
 
+    //-------------------------
+    int compression_level = -1;
+    int compression_strategy = IMWRITE_PNG_STRATEGY_RLE; // Default strategy
+    //todo: opencv use {} param, should we support it?
+
+    if( compression_level >= 0 )
+    {
+        //png_set_compression_level( png_ptr, compression_level );
+        spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, compression_level);
+    }
+    else
+    {
+        // tune parameters for speed
+        // (see http://wiki.linuxquestions.org/wiki/Libpng)
+        // png_set_filter(png_ptr, PNG_FILTER_TYPE_BASE, PNG_FILTER_SUB);
+        spng_set_option(ctx, SPNG_FILTER_CHOICE, SPNG_FILTER_CHOICE_SUB);
+        //png_set_compression_level(png_ptr, Z_BEST_SPEED);
+        spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, Z_BEST_SPEED);
+    }
+    //png_set_compression_strategy(png_ptr, compression_strategy);
+    spng_set_option(ctx, SPNG_IMG_COMPRESSION_STRATEGY, compression_strategy);
+    //-------------------------
+
+
     /* Image will be encoded according to ihdr.color_type, .bit_depth */
     spng_set_ihdr(ctx, &ihdr);
 
