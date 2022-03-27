@@ -1,5 +1,7 @@
 #include "spng.h"
 #include <cstddef>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
 #include <stdio.h>
 #include <string>
 
@@ -12,12 +14,13 @@ using namespace cv;
 #include "png.h"
 #include "zlib.h"
 
-int save_image_16uc1_spng(const std::string& image_path, const cv::Mat& src)
+int save_image_spng(const std::string& image_path, const cv::Mat& src, const std::vector<int>& params = {})
 {
-    if (src.type() != CV_16UC1) {
-        fprintf(stderr, "%s: only support 16uc1 type\n", __FUNCTION__);
-        return -1;
-    }
+    int depth = src.depth();
+    if( depth != CV_8U && depth != CV_16U )
+        return false;
+
+    bool m_buf = false;
 
     cv::Size size = src.size();
     const uint32_t height = size.height;
@@ -26,12 +29,26 @@ int save_image_16uc1_spng(const std::string& image_path, const cv::Mat& src)
     void* image = src.data;
     size_t png_size;
     int ret = 0;
+    FILE* volatile f = nullptr;
+    const int channels = src.channels();
 
     /* Creating an encoder context requires a flag */
     spng_ctx *ctx = spng_ctx_new(SPNG_CTX_ENCODER);
 
-    FILE* fout = fopen(image_path.c_str(), "wb");
-    spng_set_png_file(ctx, fout);
+
+    if (m_buf) 
+    {
+        // png_set_write_fn(png_ptr, this,
+        //     (png_rw_ptr)writeDataToBuf, (png_flush_ptr)flushBuf);
+        
+        //spng_set_png_stream(ctx, writeDataToBuf, flushBuf);
+    }
+    else
+    {
+        f = fopen(image_path.c_str(), "wb");
+        if (f)
+            spng_set_png_file(ctx, f);
+    }
 
     /* Encode to internal buffer managed by the library */
     spng_set_option(ctx, SPNG_ENCODE_TO_BUFFER, 1);
@@ -40,8 +57,8 @@ int save_image_16uc1_spng(const std::string& image_path, const cv::Mat& src)
     struct spng_ihdr ihdr;
     ihdr.height = height;
     ihdr.width = width;
-    ihdr.bit_depth = src.elemSize() * 8;
-    ihdr.color_type = SPNG_COLOR_TYPE_GRAYSCALE;
+    ihdr.bit_depth = src.elemSize1() * 8;
+    ihdr.color_type = channels == 1 ? SPNG_COLOR_TYPE_GRAYSCALE : channels == 3 ? SPNG_COLOR_TYPE_TRUECOLOR : SPNG_COLOR_TYPE_TRUECOLOR_ALPHA;
     ihdr.compression_method = 0;
     ihdr.filter_method = 0;
     ihdr.interlace_method = 0;
@@ -49,54 +66,86 @@ int save_image_16uc1_spng(const std::string& image_path, const cv::Mat& src)
     //-------------------------
     int compression_level = -1;
     int compression_strategy = IMWRITE_PNG_STRATEGY_RLE; // Default strategy
-    //todo: opencv use {} param, should we support it?
+    bool isBilevel = false; // biBilevel is for png_set_packing(), which not supported by libspng now(2022.3.27)
 
-    if( compression_level >= 0 )
+    for( size_t i = 0; i < params.size(); i += 2 )
     {
-        //png_set_compression_level( png_ptr, compression_level );
-        spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, compression_level);
+        if( params[i] == IMWRITE_PNG_COMPRESSION )
+        {
+            compression_strategy = IMWRITE_PNG_STRATEGY_DEFAULT; // Default strategy
+            compression_level = params[i+1];
+            compression_level = MIN(MAX(compression_level, 0), Z_BEST_COMPRESSION);
+        }
+        if( params[i] == IMWRITE_PNG_STRATEGY )
+        {
+            compression_strategy = params[i+1];
+            compression_strategy = MIN(MAX(compression_strategy, 0), Z_FIXED);
+        }
+        if( params[i] == IMWRITE_PNG_BILEVEL )
+        {
+            isBilevel = params[i+1] != 0;
+        }
     }
-    else
+
+    if (m_buf || f)
     {
-        // tune parameters for speed
-        // (see http://wiki.linuxquestions.org/wiki/Libpng)
-        // png_set_filter(png_ptr, PNG_FILTER_TYPE_BASE, PNG_FILTER_SUB);
-        spng_set_option(ctx, SPNG_FILTER_CHOICE, SPNG_FILTER_CHOICE_SUB);
-        //png_set_compression_level(png_ptr, Z_BEST_SPEED);
-        spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, Z_BEST_SPEED);
-    }
-    //png_set_compression_strategy(png_ptr, compression_strategy);
-    spng_set_option(ctx, SPNG_IMG_COMPRESSION_STRATEGY, compression_strategy);
-    //-------------------------
+        if( compression_level >= 0 )
+        {
+            //png_set_compression_level( png_ptr, compression_level );
+            spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, compression_level);
+        }
+        else
+        {
+            // tune parameters for speed
+            // (see http://wiki.linuxquestions.org/wiki/Libpng)
+            // png_set_filter(png_ptr, PNG_FILTER_TYPE_BASE, PNG_FILTER_SUB);
+            spng_set_option(ctx, SPNG_FILTER_CHOICE, SPNG_FILTER_CHOICE_SUB);
+            //png_set_compression_level(png_ptr, Z_BEST_SPEED);
+            spng_set_option(ctx, SPNG_IMG_COMPRESSION_LEVEL, Z_BEST_SPEED);
+        }
+        //png_set_compression_strategy(png_ptr, compression_strategy);
+        spng_set_option(ctx, SPNG_IMG_COMPRESSION_STRATEGY, compression_strategy);
+        //-------------------------
 
+        /* Image will be encoded according to ihdr.color_type, .bit_depth */
+        ret = spng_set_ihdr(ctx, &ihdr);
+        if (ret != 0)
+        {
+            printf("spng_set_ihdr() error: %s\n", spng_strerror(ret));
+        }
 
-    /* Image will be encoded according to ihdr.color_type, .bit_depth */
-    spng_set_ihdr(ctx, &ihdr);
+        // png_set_bgr(); // There is no replacement of `png_set_bgr()` in libspng. we have to manually implement it
+        if (channels == 3)
+        {
+            cv::cvtColor(src, src, cv::COLOR_BGR2RGB);
+        }
+        else if (channels == 4)
+        {
+            cv::cvtColor(src, src, cv::COLOR_BGRA2RGBA);
+        }
 
-    /* SPNG_FMT_PNG is a special value that matches the format in ihdr,
-    SPNG_ENCODE_FINALIZE will finalize the PNG with the end-of-file marker */
-    spng_format fmt = SPNG_FMT_PNG;
-    ret = spng_encode_image(ctx, image, image_size, fmt, SPNG_ENCODE_FINALIZE);
-    if (ret != 0) {
-        printf("spng_encode_image() error: %s\n", spng_strerror(ret));
+        /* SPNG_FMT_PNG is a special value that matches the format in ihdr,
+        SPNG_ENCODE_FINALIZE will finalize the PNG with the end-of-file marker */
+        spng_format fmt = SPNG_FMT_PNG;
+        ret = spng_encode_image(ctx, image, image_size, fmt, SPNG_ENCODE_FINALIZE);
+        if (ret != 0) {
+            printf("spng_encode_image() error: %s\n", spng_strerror(ret));
+        }
     }
 
     /* Free context memory */
     spng_ctx_free(ctx);
 
-    fclose(fout);
+    if(f) fclose(f);
 
     return 0;
 }
 
 
 
-int save_image_16uc1_libpng(const std::string& save_path, const cv::Mat& img)
+int save_image_libpng(const std::string& filename, const cv::Mat& img, const std::vector<int>& params = {})
 {
-    const std::vector<int>& params = {}; // useless
-
     bool m_buf = false;
-    std::string filename = "result_libpng.png";
 
     png_structp png_ptr = png_create_write_struct( PNG_LIBPNG_VER_STRING, 0, 0, 0 );
     png_infop info_ptr = 0;
@@ -236,17 +285,22 @@ void show_png16(const std::string& image_path)
 
 int main()
 {
-    std::string image_path = "depth_image.png";
-    cv::Mat src = cv::imread(image_path, cv::IMREAD_UNCHANGED);
-
+    for (std::string image_path : {"1920x1080.png", "depth_image.png"})
     {
-        AutoTimer timer("libpng");
-        save_image_16uc1_libpng("result_libpng.png", src);
-    }
+        cv::Mat src = cv::imread(image_path, cv::IMREAD_UNCHANGED);
+        fprintf(stderr, "encoding %s, height=%d, width=%d, channels=%d, pixelsize=%lu\n",
+            image_path.c_str(), src.rows, src.cols, src.channels(), src.elemSize()
+        );
 
-    {
-        AutoTimer timer("spng");
-        save_image_16uc1_spng("result_libspng.png", src);
+        {
+            AutoTimer timer("libpng");
+            save_image_libpng("result_libpng.png", src);
+        }
+
+        {
+            AutoTimer timer("spng");
+            save_image_spng("result_libspng.png", src);
+        }
     }
 
     return 0;

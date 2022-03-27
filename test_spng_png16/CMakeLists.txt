@@ -40,9 +40,10 @@ target_link_libraries(testbed
     png_static
 )
 
-# 一次拷贝多个文件
+# copy image files
 add_custom_command(TARGET testbed
     POST_BUILD
 
     COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/depth_image.png ${CMAKE_BINARY_DIR}/
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/1920x1080.png ${CMAKE_BINARY_DIR}/
 )

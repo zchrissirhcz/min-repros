@@ -93,14 +93,21 @@ With the [migration guide](https://libspng.org/docs/migrate-libpng/#encoder-conf
 And the time cost on both Linux x64 and Android arm64 are nearly the same:
 
 ```
-(base) zz@home% ./linux-x64-run.sh  
-  libpng: took   1.681 ms
-    spng: took   2.118 ms
+(base) zz@home% ./linux-x64-run.sh
+encoding 1920x1080.png, height=1080, width=1920, channels=3, pixelsize=3
+  libpng: took  73.181 ms
+    spng: took  87.562 ms
+encoding depth_image.png, height=240, width=320, channels=1, pixelsize=2
+  libpng: took   1.874 ms
+    spng: took   3.896 ms
 ```
 ```
-(base) zz@home% ./android-arm64-run.sh  
-  libpng: took   2.497 ms
-    spng: took   2.314 ms
+encoding 1920x1080.png, height=1080, width=1920, channels=3, pixelsize=3
+  libpng: took  93.955 ms
+    spng: took 106.439 ms
+encoding depth_image.png, height=240, width=320, channels=1, pixelsize=2
+  libpng: took   2.428 ms
+    spng: took   2.623 ms
 ```
 
 ![](libpng_spng_timecost_compare_same_compression.png)
