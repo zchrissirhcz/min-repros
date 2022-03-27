@@ -21,7 +21,11 @@ find_package(OpenCV REQUIRED)
 
 # --- libpng
 if(ANDROID)
-    set(libpng_install_dir "/home/zz/artifacts/libpng/1.6.38-dev/android-arm64")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(libpng_install_dir "/home/zz/artifacts/libpng/1.6.38-dev/android-arm64")
+    else()
+        set(libpng_install_dir "/home/zz/artifacts/libpng/1.6.38-dev/android-arm32")
+    endif()
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(libpng_install_dir "/home/zz/artifacts/libpng/1.6.38-dev/linux-x64")
 endif()

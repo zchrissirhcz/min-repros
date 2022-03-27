@@ -294,12 +294,12 @@ int main()
 
         {
             AutoTimer timer("libpng");
-            save_image_libpng("result_libpng.png", src);
+            save_image_libpng("res_libpng_" + image_path, src);
         }
 
         {
             AutoTimer timer("spng");
-            save_image_spng("result_libspng.png", src);
+            save_image_spng("res_spng_" + image_path, src);
         }
     }
 
