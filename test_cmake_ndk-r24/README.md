@@ -5,6 +5,8 @@ This folder serves as the minimal reproduce example for ndk+cmake build, shows n
 
 (Reported in https://github.com/android/ndk/issues/1688)
 
+**Solution: check android-ndk-r24 zip file's sha1sum, delelte the old one, unzip and compile again.**
+
 ## Environment
 - Host: Ubuntu 20.04
 - CMake version: cmake-3.23.0-rc5
