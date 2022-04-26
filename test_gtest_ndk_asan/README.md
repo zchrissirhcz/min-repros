@@ -1,3 +1,5 @@
+For the bug reported in googletest issue: https://github.com/google/googletest/issues/3808
+
 ## Description
 I write a simple unit test, with Address Sanitizer enabled:
     - cross compile and run on Android ARM device, it reports **"heap-buffer-overflow"**.
