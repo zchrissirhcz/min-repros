@@ -1,4 +1,9 @@
+## Introduction
 For the bug reported in googletest issue: https://github.com/google/googletest/issues/3808
+
+After building gtest with android-ndk-r23b (instead of the ndk-21e), no ASan reports any more, so this seems a bug of ndk-r21e.
+
+Following is the original details.
 
 ## Description
 I write a simple unit test, with Address Sanitizer enabled:
