@@ -5,7 +5,11 @@ This folder serves as the minimal reproduce example for ndk+cmake build, shows n
 
 (Reported in https://github.com/android/ndk/issues/1688)
 
-**Solution: check android-ndk-r24 zip file's sha1sum, delelte the old one, unzip and compile again.**
+**Solution: check android-ndk-r24 zip file's sha1sum, delelte the old one, unzip with command line (instead of KDE Plasma Dolphin's Ark, right click and unzip) and compile again.**
+
+The GUI software, Ark, failed to preserve link files, as reported in: https://bugs.kde.org/show_bug.cgi?id=415723
+
+![](dolphin_manually_unzip_ndk_cause_cmake_not_working.png)
 
 ## Environment
 - Host: Ubuntu 20.04
