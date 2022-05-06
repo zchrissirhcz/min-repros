@@ -33,3 +33,7 @@ message(STATUS ">>> GTest_DIR is: ${GTest_DIR}")
 find_package(GTest REQUIRED)
 
 target_link_libraries(testbed GTest::gtest GTest::gtest_main)
+
+if(ANDROID)
+  target_link_libraries(testbed log)
+endif()

@@ -1,19 +1,21 @@
 ## Introduction
-For the bug reported in googletest issue: https://github.com/google/googletest/issues/3808
-
-After building gtest with android-ndk-r23b (instead of the ndk-21e), no ASan reports any more, so this seems a bug of ndk-r21e.
-
-Following is the original details.
+For the bug was originally reported in googletest issue: https://github.com/google/googletest/issues/3808
 
 ## Description
-I write a simple unit test, with Address Sanitizer enabled:
-    - cross compile and run on Android ARM device, it reports **"heap-buffer-overflow"**.
-    - At the same time, compile and run on linux x64 platform, there is no ASan report.
+I write a simple unit test, with Address Sanitizer enabled. Compiled and run on different platform and compiler combination cases, get "heap-buffer-overflow" report on some, other no report:
+
+| Target Platform | Compiler Toolchain | ASan report on Debug Type? | ASan report on Release Type? |
+| --------------- | ------------------ | -------------------------- | ---------------------------- |
+| Android         | ndk-r25-beta2      |  Y                         | N                            |
+| Android         | ndk-r24-beta2      |  Y                         | N                            |
+| Android         | ndk-r23b           |  Y                         | Y                            |
+| Android         | ndk-r21e           |  Y                         | Y                            |
+| Linux x64       | clang 14.0.1       |  N                         | N                            |
 
 ## Environment
 
 - googletest: b53547bf01ee6d5c547bc539a498c49bc6027169
-- android-ndk: r21e
+- android-ndk: [r25-beta2, r24-beta2, r23b, r21e]
 - platform:
     - host: ubuntu 20.04 x86-64
     - device: XiaoMi 11
