@@ -1,0 +1,1 @@
+For the discussion in https://github.com/vadimcn/vscode-lldb/discussions/700

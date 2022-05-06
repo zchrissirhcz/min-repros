@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.20)
+project(test_lldb_formatter_simd)
+
+
+macro(sleek_add_flags flags)
+  if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${flags}")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${flags}")
+  elseif(CMAKE_BUILD_TYPE MATCHES "Release")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${flags}")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${flags}")
+  elseif(CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${flags}")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${flags}")
+  elseif(CMAKE_BUILD_TYPE MATCHES "MinSizeRel")
+    set(CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} ${flags}")
+    set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} ${flags}")
+  elseif(CMAKE_BUILD_TYPE EQUAL "None" OR NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${flags}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flags}")
+  else()
+    message(FATAL_ERROR "unsupported CMAKE_BUILD_TYPE for sleek_add_flags: ${CMAKE_BUILD_TYPE}")
+  endif()
+endmacro()
+
+sleek_add_flags("-g -fstandalone-debug")
+
+add_executable(testbed testbed.cpp)
