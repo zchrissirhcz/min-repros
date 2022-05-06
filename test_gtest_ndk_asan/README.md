@@ -1,6 +1,8 @@
 ## Introduction
 For the bug was originally reported in googletest issue: https://github.com/google/googletest/issues/3808
 
+Also reported in ndk issue: https://github.com/android/ndk/issues/1712
+
 ## Description
 I write a simple unit test, with Address Sanitizer enabled. Compiled and run on different platform and compiler combination cases, get "heap-buffer-overflow" report on some, other no report:
 
