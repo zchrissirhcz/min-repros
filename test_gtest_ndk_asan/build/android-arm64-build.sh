@@ -15,7 +15,7 @@ cmake -G Ninja \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
     -DANDROID_ABI="arm64-v8a" \
     -DANDROID_PLATFORM=android-24 \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=Debug \
     ../..
 
 cmake --build .
