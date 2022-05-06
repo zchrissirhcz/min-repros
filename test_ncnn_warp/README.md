@@ -1,3 +1,6 @@
+## Intro
+For the issue https://github.com/android/ndk/issues/1607
+
 ## Modify ndk-r23b to integrate with cmake correctly
 ```bash
 export NDK_DIR=/home/zz/soft/android-ndk-r23b
