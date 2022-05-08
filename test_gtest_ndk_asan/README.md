@@ -16,11 +16,54 @@ I write a simple unit test, with Address Sanitizer enabled. Compiled and run on 
 
 ## Environment
 
-- googletest: b53547bf01ee6d5c547bc539a498c49bc6027169
-- android-ndk: [r25-beta2, r24-beta2, r23b, r21e]
-- platform:
+### platform:
     - host: ubuntu 20.04 x86-64
     - device: XiaoMi 11
+
+### googletest
+**commit ID**: b53547bf01ee6d5c547bc539a498c49bc6027169
+```bash
+git clone https://github.com/google/googletest
+cd googletest
+git checkout b53547bf01ee6d5c547bc539a498c49bc6027169
+cd ..
+```
+
+**compile googletest with ndk-r21e**
+```
+cd googletest
+mkdir build && cd build
+vim android-arm64.sh
+```
+
+`googletest/build/android-arm64.sh` content:
+```bash
+#!/bin/bash
+
+ARTIFACTS_DIR=$HOME/artifacts
+ANDROID_NDK=~/soft/android-ndk-r21e  # have to be r21e to reproduce.
+TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+
+BUILD_DIR=android-arm64
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+
+cmake -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
+    -DCMAKE_INSTALL_PREFIX=$ARTIFACTS_DIR/googletest/1.11.0-dev/android-arm64 \
+    -DANDROID_ABI="arm64-v8a" \
+    -DANDROID_PLATFORM=android-24 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_GMOCK=OFF \
+    ../..
+
+cmake --build . -j && cmake --install .
+
+cd ..
+```
+
+**Build test project that links to googletest, with android-ndk: [r25-beta2, r24-beta2, r23b, r21e]**
+
 
 Code:([testbed.cpp](testbed.cpp))
 ```c++
