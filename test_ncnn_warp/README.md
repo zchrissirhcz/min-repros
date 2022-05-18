@@ -6,7 +6,8 @@ The final conclusion is: when passing `-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FL
 - ndk-r23 does not define initial CMAKE_CXX_FLAGS_RELEASE, or just replace the initial value with the passed "empty" CMAKE_CXX_FLAGS.
 
 结论：
-交叉编译 ndk 工程，调用 cmake 时，别手动传 -DCMAKE_CXX_FLAGS 或 -DCMAKE_CXX_FLAGS_RELEASE，要么是覆盖了 ndk 原设置的值， 要么是 ndk 本身没有设置这个值（存疑）。
+1. 交叉编译 ndk 工程，调用 cmake 时，别手动传 -DCMAKE_CXX_FLAGS 或 -DCMAKE_CXX_FLAGS_RELEASE，要么是覆盖了 ndk 原设置的值， 要么是 ndk 本身没有设置这个值（存疑）。
+2. Debug 和 Release 模式， 会导致相同的 Intrinsics 翻译为不同的汇编， 导致性能差异。
 
 ## <del>Modify ndk-r23b to integrate with cmake correctly</del>
 **If you are using KDE Plasma's Ark (on ubuntu 20.04) for unzipping android ndk zip file, you will encounter the following error:**
@@ -78,5 +79,5 @@ Together with OpenCV-4.5.4 (only for loading data, not affect the performance re
 | -------- | --------- |
 | ndk-r21b | 3.621770 ms |
 | ndk-r22b | 3.475886 ms |
-| ndk-r23b | 177.813490 ms |
+| ndk-r23b | 177.813490 ms(Debug mode) |
 | ndk-r24-beta1 | 3.544636 ms |

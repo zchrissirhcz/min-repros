@@ -1,3 +1,28 @@
 # clangd
 **/.cache/*
 
+test_ncnn_warp/build/android-arm64/.ninja_deps
+test_ncnn_warp/build/android-arm64/.ninja_log
+test_ncnn_warp/build/android-arm64/build.ninja
+test_ncnn_warp/build/android-arm64/cmake_install.cmake
+test_ncnn_warp/build/android-arm64/CMakeCache.txt
+test_ncnn_warp/build/android-arm64/compile_commands.json
+test_ncnn_warp/build/android-arm64/testbed
+test_ncnn_warp/build/android-arm64/CMakeFiles/cmake.check_cache
+test_ncnn_warp/build/android-arm64/CMakeFiles/CMakeError.log
+test_ncnn_warp/build/android-arm64/CMakeFiles/CMakeOutput.log
+test_ncnn_warp/build/android-arm64/CMakeFiles/rules.ninja
+test_ncnn_warp/build/android-arm64/CMakeFiles/TargetDirectories.txt
+test_ncnn_warp/build/android-arm64/CMakeFiles/3.23.0-rc5/CMakeCCompiler.cmake
+test_ncnn_warp/build/android-arm64/CMakeFiles/3.23.0-rc5/CMakeCXXCompiler.cmake
+test_ncnn_warp/build/android-arm64/CMakeFiles/3.23.0-rc5/CMakeDetermineCompilerABI_C.bin
+test_ncnn_warp/build/android-arm64/CMakeFiles/3.23.0-rc5/CMakeDetermineCompilerABI_CXX.bin
+test_ncnn_warp/build/android-arm64/CMakeFiles/3.23.0-rc5/CMakeSystem.cmake
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/ompver_C.bin
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/ompver_CXX.bin
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/OpenMPCheckVersion.c
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/OpenMPCheckVersion.cpp
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/OpenMPTryFlag.c
+test_ncnn_warp/build/android-arm64/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp
+test_ncnn_warp/build/android-arm64/CMakeFiles/testbed.dir/testbed.cpp.o
+test_ncnn_warp/build/android-arm64/CMakeFiles/testbed.dir/warpaffine.cpp.o
