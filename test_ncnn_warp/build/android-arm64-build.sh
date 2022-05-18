@@ -2,8 +2,8 @@
 
 #ANDROID_NDK=~/soft/android-ndk-r21b
 #ANDROID_NDK=~/soft/android-ndk-r22b
-#ANDROID_NDK=~/soft/android-ndk-r23b
-ANDROID_NDK=~/soft/android-ndk-r24-beta1
+ANDROID_NDK=~/soft/android-ndk-r23b
+#ANDROID_NDK=~/soft/android-ndk-r24-beta1
 
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 

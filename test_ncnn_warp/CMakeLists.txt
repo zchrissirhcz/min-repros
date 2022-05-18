@@ -9,7 +9,7 @@ set(ncnn_DIR "/home/zz/lib/ncnn/linux-x64/lib/cmake/ncnn")
 find_package(ncnn)
 
 if(ANDROID)
-    set(OpenCV_DIR "/home/zz/artifacts/opencv/android-arm64/4.5.4/sdk/native/jni")
+    set(OpenCV_DIR "/home/zz/artifacts/opencv/4.5.5/OpenCV-android-sdk/sdk/native/jni/abi-arm64-v8a")
 else()
 endif()
 find_package(OpenCV REQUIRED)
@@ -20,3 +20,6 @@ add_executable(testbed
     warpaffine.cpp
 )
 target_link_libraries(testbed ${OpenCV_LIBS})
+
+message(STATUS ">>> ANDROID_COMPILER_FLAGS_RELEASE: ${ANDROID_COMPILER_FLAGS_RELEASE}")
+message(STATUS ">>> CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")

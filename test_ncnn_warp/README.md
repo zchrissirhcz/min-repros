@@ -1,17 +1,16 @@
 ## Intro
 For the issue https://github.com/android/ndk/issues/1607
 
-## Modify ndk-r23b to integrate with cmake correctly
-```bash
-export NDK_DIR=/home/zz/soft/android-ndk-r23b
-cd $NDK_DIR/toolchains/llvm/prebuilt/linux-x86_64/bin
-rm clang    # it's content is `clang-12`
-rm clang++  # it's content is `clang-12`
-mv clang-12 clang
-ln -sf ./clang ./clang++ 
-```
+The final conclusion is: when passing `-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS_RELEASE= <other stuffs>` to cmake,
+- ndk-r22 think it should append the specified "empty" CMAKE_CXX_FLAGS_RELEASE to its initial CMAKE_CXX_FLAGS_RELEASE (defined in android.toolchain.cmake)
+- ndk-r23 does not define initial CMAKE_CXX_FLAGS_RELEASE, or just replace the initial value with the passed "empty" CMAKE_CXX_FLAGS.
 
-Otherwise you'll see cmake erros like this:
+结论：
+交叉编译 ndk 工程，调用 cmake 时，别手动传 -DCMAKE_CXX_FLAGS 或 -DCMAKE_CXX_FLAGS_RELEASE，要么是覆盖了 ndk 原设置的值， 要么是 ndk 本身没有设置这个值（存疑）。
+
+## <del>Modify ndk-r23b to integrate with cmake correctly</del>
+**If you are using KDE Plasma's Ark (on ubuntu 20.04) for unzipping android ndk zip file, you will encounter the following error:**
+
 ```
 -- Android: Targeting API '21' with architecture 'arm64', ABI 'arm64-v8a', and processor 'aarch64'
 -- Android: Selected unified Clang toolchain
@@ -38,6 +37,18 @@ CMake Error at /home/zz/soft/cmake-3.22.0-rc3/share/cmake-3.22/Modules/CMakeTest
     clang-13: error: no input files
     ninja: build stopped: subcommand failed.
 ```
+
+The previous solution was:
+```bash
+export NDK_DIR=/home/zz/soft/android-ndk-r23b
+cd $NDK_DIR/toolchains/llvm/prebuilt/linux-x86_64/bin
+rm clang    # it's content is `clang-12`
+rm clang++  # it's content is `clang-12`
+mv clang-12 clang
+ln -sf ./clang ./clang++ 
+```
+
+But we'd better delete it, and use `unzip` command line instead of `Ark`, since it won't correctly handle symbolic links.
 
 ## Compile and run
 ```bash
