@@ -2,6 +2,7 @@
 For https://github.com/vadimcn/vscode-lldb/issues/708
 
 Current solution: in VSCode setting.json, let codelldb using new version lldb (manually built):
+(I use c2a8a104ec320c8bed39c3632eae2fb37f53487b)
 ```bash
     "lldb.library": "/home/zz/soft/llvm15-dev/lib/liblldb.so",
     "lldb.adapterEnv": {
