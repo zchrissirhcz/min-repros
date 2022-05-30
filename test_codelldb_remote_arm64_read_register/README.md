@@ -1,6 +1,14 @@
 # test codelldb remote debug arm64 read register
 For https://github.com/vadimcn/vscode-lldb/issues/708
 
+Current solution: in VSCode setting.json, let codelldb using new version lldb (manually built):
+```bash
+    "lldb.library": "/home/zz/soft/llvm15-dev/lib/liblldb.so",
+    "lldb.adapterEnv": {
+        "LLDB_DEBUGSERVER_PATH": "/home/zz/soft/llvm15-dev/bin/lldb-server"
+    },
+```
+
 ## VSCode CodeLLDB remote debug output
 ![](codelldb_lldb_prompt.png)
 
