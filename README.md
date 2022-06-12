@@ -7,10 +7,10 @@ Zhuo's Minimal-Reproducible Examples for various Open Source projects
 - Android NDK
 - ...
 
-Go to each subdirectory details.
+Go to each subdirectory for details.
 
 ## References
-- What is minimal-reproducible-exampel: https://stackoverflow.com/help/minimal-reproducible-example
+- What is minimal-reproducible-example: https://stackoverflow.com/help/minimal-reproducible-example
 - How to create a Minimal, Reproducible Example : https://stackoverflow.com/help/minimal-reproducible-example
 
 ## Memo
