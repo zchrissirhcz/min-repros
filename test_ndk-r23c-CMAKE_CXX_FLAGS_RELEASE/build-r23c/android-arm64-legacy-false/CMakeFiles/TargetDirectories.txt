@@ -1,0 +1,3 @@
+/home/zz/work/test/dump_flags/build-r23c/android-arm64-legacy-false/CMakeFiles/testbed.dir
+/home/zz/work/test/dump_flags/build-r23c/android-arm64-legacy-false/CMakeFiles/edit_cache.dir
+/home/zz/work/test/dump_flags/build-r23c/android-arm64-legacy-false/CMakeFiles/rebuild_cache.dir
