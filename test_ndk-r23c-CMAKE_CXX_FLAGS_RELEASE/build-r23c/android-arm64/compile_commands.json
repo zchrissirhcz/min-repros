@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/zz/work/test/dump_flags/build-r23c/android-arm64",
-  "command": "/home/zz/soft/android-ndk-r23c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android21 --gcc-toolchain=/home/zz/soft/android-ndk-r23c/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/zz/soft/android-ndk-r23c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Werror=implicit-function-declaration -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=return-type -Werror=shadow -Werror=return-stack-address -Werror=uninitialized -Werror=format -Werror=int-conversion -Werror=array-bounds -Werror=int-to-pointer-cast -Werror=unknown-escape-sequence -Werror=comment -Werror=unused-value -Werror=unused-comparison -Werror=multichar -Werror=parentheses -DNDEBUG   -Werror=implicit-function-declaration -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=return-type -Werror=shadow -Werror=return-stack-address -Werror=uninitialized -Werror=format -Werror=int-conversion -Werror=array-bounds -Werror=int-to-pointer-cast -Werror=unknown-escape-sequence -Werror=comment -Werror=unused-value -Werror=unused-comparison -Werror=multichar -Werror=parentheses -fPIE -std=gnu++11 -o CMakeFiles/testbed.dir/testbed.cpp.o -c /home/zz/work/test/dump_flags/testbed.cpp",
-  "file": "/home/zz/work/test/dump_flags/testbed.cpp"
-}
-]

@@ -1,7 +1,16 @@
 # ndk-r23c cause Release build missing optimization flags
 
+## The table
+| ndk revision | CMAKE_CXX_FLAGS_RELEASE | CMAKE_CXX_FLAGS_RELEASE + LEGACY_TOOLCHAIN=True | CMAKE_CXX_FLAGS_RELEASE + LEGACY_TOOLCHAIN=False |
+| ------------ | ----------------------- | ------- | -------- |
+| ndk-r21e     | -O2    |   N/A |  N/A |
+| ndk-r23      | -O3    |  -O2  | -O3  |
+| ndk-r23b     | -O3    |   -   | -O3  | 
+| ndk-r23c     |  -     |   -   | -O3  |
+
 For ndk-r23c, if passing `-DCMAKE_BUILD_TYPE=Release`, the expected behaviour is, `CMAKE_CXX_FLAGS_RELEASE` is with `-O3` or `-O2`.
 
+## Details
 However, the following call, will get no `-O`s in the output:
 ```bash
 cmake -G Ninja \

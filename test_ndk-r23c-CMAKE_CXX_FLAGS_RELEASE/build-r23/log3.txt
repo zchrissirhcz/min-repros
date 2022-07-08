@@ -1,21 +1,21 @@
--- The C compiler identification is Clang 12.0.9
--- The CXX compiler identification is Clang 12.0.9
+-- The C compiler identification is Clang 12.0.5
+-- The CXX compiler identification is Clang 12.0.5
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /home/zz/soft/android-ndk-r23c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped
+-- Check for working C compiler: /home/zz/soft/android-ndk-r23/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /home/zz/soft/android-ndk-r23c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Check for working CXX compiler: /home/zz/soft/android-ndk-r23/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- CMAKE_BUILD_TYPE: Release
 -- CMAKE_C_FLASGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security 
 -- CMAKE_CXX_FLASGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  
--- CMAKE_CXX_FLAGS_RELEASE: -DNDEBUG 
+-- CMAKE_CXX_FLAGS_RELEASE: -O2 -DNDEBUG 
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/zz/work/min-repros/test_ndk-r23c-CMAKE_CXX_FLAGS_RELEASE/build-r23c/android-arm64
+-- Build files have been written to: /home/zz/work/min-repros/test_ndk-r23c-CMAKE_CXX_FLAGS_RELEASE/build-r23/android-arm64-legacy-true
 [1/2] Building CXX object CMakeFiles/testbed.dir/testbed.cpp.o
 [2/2] Linking CXX executable testbed
