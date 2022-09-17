@@ -13,6 +13,16 @@ v2.7.1
 xmake v2.7.1+HEAD.0162040, A cross-platform build utility based on Lua
 ```
 
+## xmake.lua (不生效)
+```lua
+add_requires("brew::opencv")
+
+target("test")
+    set_kind("binary")
+    add_files("test.cpp")
+    add_packages("brew::opencv")
+```
+
 ## brew install opencv
 确认用 brew 安装了 opencv
 
@@ -23,3 +33,16 @@ xmake v2.7.1+HEAD.0162040, A cross-platform build utility based on Lua
 
 ## 预期行为
 预期行为是 xmake 命令不报错， 能够让 test.cpp 正确找到 opencv 头文件包含路径。
+
+## xmake.lua (修改，可生效)
+`brew::opencv` 改为 `cmake::OpenCV`:
+
+```lua
+add_requires("cmake::OpenCV")
+
+target("test")
+    set_kind("binary")
+    set_languages("cxx11")
+    add_files("test.cpp")
+    add_packages("cmake::OpenCV")
+```
