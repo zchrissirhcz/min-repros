@@ -8,7 +8,7 @@ Related:
   - https://github.com/google/sanitizers/issues/1251
 
 Solution: 
-   `ASAN_OPTIONS=detect_container_overflow=1  ./testbed`
+   `ASAN_OPTIONS=detect_container_overflow=0  ./testbed`
 
 ## Intro
 This folder demonstrates an "bug"(I thought it should be), related to gtest and Android NDK.
