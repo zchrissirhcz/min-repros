@@ -2,9 +2,11 @@
 
 ## TL;DR
 Reported in https://github.com/google/googletest/issues/4019
+
 Related: 
   - https://github.com/google/googletest/issues/2849
   - https://github.com/google/sanitizers/issues/1251
+
 Solution: 
    `ASAN_OPTIONS=detect_container_overflow=1  ./testbed`
 
