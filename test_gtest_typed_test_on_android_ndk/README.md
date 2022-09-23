@@ -1,5 +1,13 @@
 # test_gtest_typed_test_on_android_ndk
 
+## TL;DR
+Reported in https://github.com/google/googletest/issues/4019
+Related: 
+  - https://github.com/google/googletest/issues/2849
+  - https://github.com/google/sanitizers/issues/1251
+Solution: 
+   `ASAN_OPTIONS=detect_container_overflow=1  ./testbed`
+
 ## Intro
 This folder demonstrates an "bug"(I thought it should be), related to gtest and Android NDK.
 
