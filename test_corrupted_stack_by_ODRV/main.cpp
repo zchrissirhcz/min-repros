@@ -4,7 +4,7 @@
 
 int main()
 {
-    //hello(NULL);
+    hello(NULL);
     world();
     return 0;
 }

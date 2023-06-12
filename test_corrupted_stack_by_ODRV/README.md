@@ -3,16 +3,28 @@
 ODR: One Definition Rule
 ODRV: One Definition Rule Violation
 
-## Environment
+This example contains two `MYRECT` classes, lives in different Translation Unit, and their `sizeof()` differs.
+
+The constructor `MYRECT::MYRECT()` is actually **weak symbol**, the linker may pick any one of them. And the mangled names (symbol names) are same.
+
+## Reproduce Steps
 Currently only tested with VS2022.
 
 Without ASan.
 
-Default VS project in Debug mode, which enabled `/RTC` (run time check).
+Default VS project in Debug mode, which enabled `/RTC1` (run time check).
 
 ```bash
 cmake -S . -B build -G "Visual Studio 17 2022" -A x64
 ```
+
+Sometimes this project can reproduce, sometimes not, it might be the Visual Studio's linker use full path, timestamp, etc. Then you may try the following trick:
+
+Manually open each project's property page, enable Code Analysis on Build:
+![](DisableCodeAnalysisOnBuild.png)
+
+Then build each build, then disable each project's Code Analysis(Note: we have to do the enable-disable, otherwise Visual Studio cannot reproduce):
+![](EnableCodeAnalysisOnBuild.png)
 
 ## Debug Output
 ![](CorruptedStack.png)
