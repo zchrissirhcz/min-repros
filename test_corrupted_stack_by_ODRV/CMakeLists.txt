@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(x)
 
+#include(asan.cmake)
 add_library(hello STATIC
     hello.cpp
     hello.h

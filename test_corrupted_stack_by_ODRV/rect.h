@@ -1,18 +1,21 @@
 #include <stdio.h>
 
+
 struct MYRECT
 {
-	float x;
-	float y;
-	float width;
-	float height;
-	float angle;
-	MYRECT()
-	{
-		printf("hello's MYRECT\n");
-	}
-	MYRECT(float x, float y, float width, float height, float angle) : x(x), y(y), width(width), height(height), angle(angle) {}
+    float x;
+    float y;
+    float width;
+    float height;
+    float angle;
+    MYRECT()
+    {
+        printf("MYRECT::MYRECT() in %s\n", __FILE__);
+    }
+    MYRECT(float x, float y, float width, float height, float angle) : x(x), y(y), width(width), height(height), angle(angle) {}
 };
+
+
 
 //#ifdef __cplusplus
 //extern "C" {
