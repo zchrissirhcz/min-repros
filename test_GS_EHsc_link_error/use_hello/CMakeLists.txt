@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #add_subdirectory(hello)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 add_library(hello STATIC IMPORTED GLOBAL)
 #set(BUILDENV "vs2022-x64")
 #set(BUILDENV "vs2019-x64")
