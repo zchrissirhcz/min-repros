@@ -49,6 +49,9 @@ D:\github\min-repros\test_GS_EHsc_link_error\use_hello\build\vs2017-x64\Debug\te
 ![](FH3_vs_FH4_in_code.png)
 可以看到，Frame Handler 4 使用的结构体，使用了 union 来减小内存占用， 并且还是用了位域，进一步缩小占用。
 
+## Known victime of Open-Source libraries
+- [protobuf](https://github.com/protocolbuffers/protobuf)
+
 ## References
 [^1]: [/GS (Buffer Security Check)](https://learn.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-170)
 [^2]: [/EH (Exception handling model)](https://learn.microsoft.com/en-us/cpp/build/reference/eh-exception-handling-model?view=msvc-170)

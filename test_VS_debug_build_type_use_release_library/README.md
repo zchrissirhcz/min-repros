@@ -1,7 +1,7 @@
 # Visual Studio Debug build type use Relase library
 
 ## Purpose
-Gives the minimal reprodiable example, demonstrates that why and what condition causes Debug build type cann't use Release libraries (which causes link error).
+Gives the minimal reprodiable example, demonstrates that why and what condition causes Debug build type can't use Release libraries (which causes link error).
 
 ### Minimal Reproduce
 The linked library's API uses C++ containers, e.g. `std::string` in `hello.h` ([hello/hello.h](hello/hello.h)).
